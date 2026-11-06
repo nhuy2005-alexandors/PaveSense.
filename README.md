@@ -56,6 +56,13 @@ Class ownership means responsibility for collecting, auditing, mapping, and repo
 
 GitHub usernames for Khánh and Phúc have not yet been confirmed; add them as collaborators after receiving their usernames.
 
+## Project continuity
+
+- [Current session handoff (2026-11-06)](docs/HANDOFF_2026-11-06.md) — taxonomy semantics, dataset acquisition status, Can Tho evidence, storage boundaries, blockers, and resume steps.
+- [Dataset data contract](docs/data-contract.md)
+- [Project scope](docs/project-scope.md)
+- [Team workflow](docs/team-workflow.md)
+
 ## Development
 
 ```bash
