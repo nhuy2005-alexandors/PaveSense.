@@ -1,0 +1,34 @@
+version: 1
+status: provisional
+classification:
+  type: multi_label
+  classes:
+    - {id: C01, index: 0, name: normal_road, display_name: Normal Road, mutually_exclusive_with: [C02, C03, C04, C05, C06, C07]}
+    - {id: C02, index: 1, name: longitudinal_crack, display_name: Longitudinal Crack}
+    - {id: C03, index: 2, name: transverse_crack, display_name: Transverse Crack}
+    - {id: C04, index: 3, name: alligator_cracking, display_name: Alligator Cracking}
+    - {id: C05, index: 4, name: pothole, display_name: Pothole}
+    - {id: C06, index: 5, name: surface_deterioration, display_name: Surface Deterioration}
+    - {id: C07, index: 6, name: surface_deformation, display_name: Surface Deformation}
+
+detection:
+  type: multi_class_object_detection
+  background_only_classification_label: C01
+  classes:
+    - {detection_id: 0, taxonomy_id: C02, name: longitudinal_crack}
+    - {detection_id: 1, taxonomy_id: C03, name: transverse_crack}
+    - {detection_id: 2, taxonomy_id: C04, name: alligator_cracking}
+    - {detection_id: 3, taxonomy_id: C05, name: pothole}
+    - {detection_id: 4, taxonomy_id: C06, name: surface_deterioration}
+    - {detection_id: 5, taxonomy_id: C07, name: surface_deformation}
+
+annotation_rules:
+  - One image may contain multiple damage classes.
+  - Store one physical image once; represent multiple labels and boxes in annotations.
+  - C01 is a negative/background image for detection; do not create a Normal bounding box.
+  - A repaired patch is not automatically a damage class; label the visible current condition.
+  - A flush, intact patch may be C01 if no target distress is visible.
+  - A raised or depressed patch may be C07 when geometric deformation is visible.
+  - A patch with visible cracks, a cavity, or surface material loss may receive the corresponding damage label.
+  - If water, glare, occlusion, or distance prevents reliable judgment, mark uncertain/unassessable rather than guessing.
+  - Do not split a generic source label such as Linear Crack into C02 and C03 without visual evidence of orientation.
